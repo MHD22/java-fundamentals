@@ -12,3 +12,15 @@ The lab contain these methods:
 * Clock function
 
 ### ______________________________
+
+## Lab: 02 - Arrays, for loops, testing
+
+the lab:02 is exist inside the "basicLibrary" folder.
+The lab contain these methods:
+
+* roll
+* containdDuplicates
+* getAvg
+* lowestAvg
+
+### ______________________________

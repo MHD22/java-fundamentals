@@ -3,8 +3,75 @@
  */
 package basicLibrary;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class Library {
-    public boolean someLibraryMethod() {
-        return true;
+
+    public int[] roll(int n){
+        if(n<0)
+            n=0;
+        int[] outputArray = new int[n];
+        Random r = new Random();
+
+        for (int i= 0; i < n ; i++){
+            int randBetween1and6 = r.nextInt(6)+1;
+            outputArray[i]=randBetween1and6;
+        }
+        return outputArray;
+    }
+
+    public boolean containsDuplicates (int[] arr){
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        for (int x : arr){
+            uniqueNumbers.add(x);
+        }
+        boolean thereIsDuplicates = ! (uniqueNumbers.size() == arr.length);
+        return thereIsDuplicates;
+    }
+
+    public  double getAvg(int[] arr){
+        if(arr.length==0)
+            return 0;
+        double sum=0;
+        double avg =0;
+        int size = arr.length;
+        for (int x:arr){
+            sum+=x;
+        }
+        avg = sum/size;
+        return avg;
+    }
+
+    public int[] lowestAvg(int[][]arr){
+        double currentAvg=0;
+        double currentSum =0;
+        double lowAvg=0;
+        int numberOfLowestArray=0;
+
+        for (int x : arr[0]){
+            currentSum+=x;
+        }
+        lowAvg = currentSum/arr[0].length;
+
+
+
+
+        for(int i =1 ; i< arr.length; i++){
+
+            int size = arr[i].length;
+            currentSum=0;
+            for (int x:arr[i]){
+                currentSum+=x;
+            }
+            currentAvg= currentSum/size;
+            if(lowAvg>currentAvg){
+                lowAvg=currentAvg;
+                numberOfLowestArray=i;
+            }
+
+        }
+        return arr[numberOfLowestArray];
     }
 }

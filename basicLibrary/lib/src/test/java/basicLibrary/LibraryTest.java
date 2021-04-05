@@ -7,8 +7,36 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+
+
+    Library testObject = new Library();
+    @Test public void testRollMethod(){
+        int[]arr = testObject.roll(6);
+        assertEquals("size of array should be 6",6,arr.length);
     }
+    @Test public void testContainsDuplicates(){
+        int[]arr1 = {1,2,3,4,5};
+        int[]arr2 = {1,2,2,3,4,5,5};
+        assertTrue("Must return true",testObject.containsDuplicates(arr2));
+        assertFalse("Must return false",testObject.containsDuplicates(arr1));
+    }
+    @Test public void testGetAvg(){
+        int[]arr = {1,2,3,4};
+        int[]arr2 = {5};
+        int[]arr3 = {};
+        Double expected = 2.5;
+        assertEquals("must return 2.5",2.5,testObject.getAvg(arr),0);
+        assertEquals("must return 5",5,testObject.getAvg(arr2),0);
+        assertEquals("must return 0",0,testObject.getAvg(arr3),0);
+    }
+    @Test public void testLowestAvg(){
+        int[][] arr2 = {
+                {1,2,3,4,5,6},
+                {2,2,3},
+                {1,2,3,1},
+                {100}
+        };
+        assertArrayEquals("Must return 2 2 3",arr2[2],testObject.lowestAvg(arr2));
+    }
+
 }
