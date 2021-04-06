@@ -4,6 +4,10 @@
 package basicLibrary;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class LibraryTest {
@@ -24,7 +28,6 @@ public class LibraryTest {
         int[]arr = {1,2,3,4};
         int[]arr2 = {5};
         int[]arr3 = {};
-        Double expected = 2.5;
         assertEquals("must return 2.5",2.5,testObject.getAvg(arr),0);
         assertEquals("must return 5",5,testObject.getAvg(arr2),0);
         assertEquals("must return 0",0,testObject.getAvg(arr3),0);
@@ -36,7 +39,39 @@ public class LibraryTest {
                 {1,2,3,1},
                 {100}
         };
-        assertArrayEquals("Must return 2 2 3",arr2[2],testObject.lowestAvg(arr2));
+        assertArrayEquals("Must return 1 2 3 1",arr2[2],testObject.lowestAvg(arr2));
     }
+    @Test public void testAnalyzeWeather(){
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+        String output = testObject.analyzeWeather(weeklyMonthTemperatures);
+        String expected = "High: 72\n" +
+                "Low: 51\n" +
+                "Never saw temperature: 63\n" +
+                "Never saw temperature: 67\n" +
+                "Never saw temperature: 68\n" +
+                "Never saw temperature: 69";
+        assertEquals("must have this output: "+expected,expected, output);
+    }
+    @Test public void testTallyMethod(){
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+        String winner = testObject.tally(votes);
+        String expected = "Bush";
+        assertEquals("The output must be 'Bush'",expected,winner);
+    }
+
 
 }

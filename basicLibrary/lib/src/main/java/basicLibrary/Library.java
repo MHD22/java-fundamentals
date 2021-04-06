@@ -3,9 +3,7 @@
  */
 package basicLibrary;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Library {
 
@@ -34,6 +32,8 @@ public class Library {
     public  double getAvg(int[] arr){
         if(arr.length==0)
             return 0;
+        if(arr.length ==1)
+            return arr[0];
         double sum=0;
         double avg =0;
         int size = arr.length;
@@ -46,26 +46,14 @@ public class Library {
 
     public int[] lowestAvg(int[][]arr){
         double currentAvg=0;
-        double currentSum =0;
         double lowAvg=0;
         int numberOfLowestArray=0;
 
-        for (int x : arr[0]){
-            currentSum+=x;
-        }
-        lowAvg = currentSum/arr[0].length;
-
-
-
+        lowAvg = getAvg(arr[0]);
 
         for(int i =1 ; i< arr.length; i++){
 
-            int size = arr[i].length;
-            currentSum=0;
-            for (int x:arr[i]){
-                currentSum+=x;
-            }
-            currentAvg= currentSum/size;
+            currentAvg= getAvg(arr[i]);
             if(lowAvg>currentAvg){
                 lowAvg=currentAvg;
                 numberOfLowestArray=i;
@@ -74,4 +62,47 @@ public class Library {
         }
         return arr[numberOfLowestArray];
     }
+
+    public String analyzeWeather(int[][] arr){
+        Set<Integer> uniqueTemperatures = new HashSet<>();
+        int high = 0;
+        int low = arr[0][0];
+        String output = "";
+        for(int[] innerArr : arr){
+            for(int x : innerArr){
+                uniqueTemperatures.add(x);
+                if(x > high)
+                    high = x;
+                if(x < low)
+                    low = x;
+            }
+        }
+        output += "High: "+high+"\nLow: "+low;
+        for(int i = low; i<=high; i++){
+            if(! uniqueTemperatures.contains(i))
+                output+="\nNever saw temperature: "+i;
+
+        }
+        return output;
+    }
+
+    public String tally(List<String> inputList){
+        Map<String,Integer> votes = new HashMap<>();
+        for(String item : inputList){
+            votes.put(item,votes.getOrDefault(item,0)+1);
+        }
+        int maxVotes = 0 ;
+        String winner="";
+        for(String key: votes.keySet()){
+            int currentVotes = votes.get(key);
+            if(currentVotes > maxVotes){
+                maxVotes = currentVotes;
+                winner = key;
+            }
+        }
+
+        return winner;
+    }
+
+
 }

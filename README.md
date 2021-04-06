@@ -24,3 +24,15 @@ The lab contain these methods:
 * lowestAvg
 
 ### ______________________________
+
+## Lab: 03 - Maps and File I/O
+
+the lab:03 is exist inside the "basicLibrary" folder.
+and the linter folder.
+The lab contain these methods:
+
+* Analyzing Weather Data
+* Tallying Election
+* File I/O (linter)
+
+### ______________________________
