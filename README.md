@@ -36,3 +36,16 @@ The lab contain these methods:
 * File I/O (linter)
 
 ### ______________________________
+
+## Lab: 06 - Inheritance
+
+the lab:03 is exist inside the "inheritance" folder.
+The lab contain these classes:
+
+* Restaurant
+* Review
+
+to test the code .. go the 'inheritance' directory, then in command line type the following command: `./gradlew test`
+OR: from the IDE go to LibraryTest file .. then run this class.
+
+### ______________________________
