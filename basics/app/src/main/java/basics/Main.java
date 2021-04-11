@@ -44,6 +44,7 @@ public class Main {
                 }
                 else{
                     System.out.println("tails");
+                    countHeads=0;
                 }
                 countFlips++;
                 rand = random.nextDouble();
