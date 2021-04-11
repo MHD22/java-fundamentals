@@ -14,7 +14,7 @@ public class App {
 
     public  String reading(String fileName) {
         Path path = Paths.get("..", fileName);
-        System.out.println(path.toAbsolutePath());
+//        System.out.println(path.toAbsolutePath());
         try (BufferedReader reader = Files.newBufferedReader(path);) {
             String line = reader.readLine();
             int linNum = 1;
@@ -45,8 +45,8 @@ public class App {
 
     public static void main(String[] args) {
         App app = new App();
-//        System.out.println(app.reading("linter/jsFileError.js")); // to run from IDE
-        System.out.println(app.reading("jsFileError.js")); // to run from CLI
+        System.out.println(app.reading("linter/gates.js")); // to run from IDE
+//        System.out.println(app.reading("gates.js")); // to run from CLI
 
 
     }
