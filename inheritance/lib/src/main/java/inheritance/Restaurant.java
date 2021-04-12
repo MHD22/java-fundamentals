@@ -1,10 +1,14 @@
 package inheritance;
 
-public class Restaurant {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Restaurant implements Reviewable {
     private String name;
     private int numOfStars;
     private String priceCategory;
-    private Review review;
+    List<Review> reviews = new ArrayList<>();
+
 
     public Restaurant(String name, int numOfStars, String priceCategory) {
         this.name = name;
@@ -28,8 +32,6 @@ public class Restaurant {
         if(numOfStars >= 0 && numOfStars <=5){
             this.numOfStars = numOfStars;
         }
-        else
-            this.numOfStars =0;
     }
 
     public String getPriceCategory() {
@@ -40,17 +42,12 @@ public class Restaurant {
         this.priceCategory = priceCategory;
     }
 
-    public Review getReview() {
-        return review;
-    }
 
     public void addReview(Review review) {
-            if(this.review == null || this.review != review) {
+            if(! this.reviews.contains(review)) {
                 this.setNumOfStars(review.getNumOfStars());
-                this.review = review;
+                this.reviews.add(review);
             }
-
-
     }
 
     @Override
@@ -59,7 +56,16 @@ public class Restaurant {
                 "name='" + name + '\'' +
                 ", numOfStars=" + numOfStars +
                 ", priceCategory='" + priceCategory + '\'' +
-                ", review=" + review+
+                ", reviews=" + reviews+
                 '}';
+    }
+
+    @Override
+    public void addReview(String body, String author, int numOfStars) {
+        Review newRev = new Review(body,author,numOfStars);
+        if(! this.reviews.contains(newRev)) {
+            this.setNumOfStars(newRev.getNumOfStars());
+            this.reviews.add(newRev);
+        }
     }
 }
