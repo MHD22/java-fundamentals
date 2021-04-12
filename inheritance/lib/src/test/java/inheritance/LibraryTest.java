@@ -4,40 +4,106 @@
 package inheritance;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class LibraryTest {
-       public Restaurant test = new Restaurant("The first",3,"$");
-    @Test public void testRestaurantToString() {
+    public Restaurant test = new Restaurant("The first", 3, "$");
+
+    @Test
+    public void testRestaurantToString() {
         String output = test.toString();
-        String expected = "Restaurant{name='The first', numOfStars=3, priceCategory='$', review=null}";
-        assertEquals(expected,output);
+        String expected = "Restaurant{name='The first', numOfStars=3, priceCategory='$', reviews=[]}";
+        assertEquals(expected, output);
     }
 
-    @Test public void testReviewToString() {
-        Review rev = new Review(this.test,"review 1","Mhd",5);
+    @Test
+    public void testReviewToString() {
+        Review rev = new Review( "review 1", "Mhd", 5);
         String output = rev.toString();
-        String expected = "Review{body='review 1', author='Mhd', numOfStars=5, restaurant=The first}";
-        assertEquals(expected,output);
+        String expected = "Review{body='review 1', author='Mhd', numOfStars=5}";
+        assertEquals(expected, output);
     }
-    @Test public void testAddReview() {
-        Review rev = new Review(this.test,"review 1","Mhd",5);
+
+    @Test
+    public void testAddReview() {
+        Review rev = new Review("review 1", "Mhd", 5);
         test.addReview(rev);
         String output = test.toString();
-        String expected = "Restaurant{name='The first', numOfStars=5, priceCategory='$', review=Review{body='review 1', author='Mhd', numOfStars=5, restaurant=The first}}";
-        assertEquals(expected,output);
+        String expected = "Restaurant{name='The first', numOfStars=5, priceCategory='$', reviews=[Review{body='review 1', author='Mhd', numOfStars=5}]}";
+        assertEquals(expected, output);
     }
 
-    @Test public void testAddReviewEditStarsRating() {
-        Review rev = new Review(this.test,"review 1","Mhd",5);
+    @Test
+    public void testAddReviewEditStarsRating() {
+        Review rev = new Review("review 1", "Mhd", 5);
         int oldStars = test.getNumOfStars();
-        int expectedOldStars =3;
+        int expectedOldStars = 3;
         test.addReview(rev);
         int newStars = test.getNumOfStars();
-        int expectedNewStars =5;
-         assertEquals("old stars for the restaurant should be 3",expectedOldStars,oldStars);
-         assertEquals("new stars for the restaurant should be 5",expectedNewStars,newStars);
+        int expectedNewStars = 5;
+        assertEquals("old stars for the restaurant should be 3", expectedOldStars, oldStars);
+        assertEquals("new stars for the restaurant should be 5", expectedNewStars, newStars);
     }
+
+
+    @Test
+    public void testShopCreateAnInstance() {
+        Shop testShop = new Shop("first shop", "the first shop in the app", 10);
+        String output = testShop.toString();
+        String expected = "Shop{name='first shop', description='the first shop in the app', numOfDollarSigns=10, reviews=[]}";
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testShopAddReview() {
+        Shop testShop = new Shop("first shop", "the first shop in the app", 10);
+        testShop.addReview("Its service is amazing","mohammad",7);
+        String output = testShop.toString();
+        String expected = "Shop{name='first shop', description='the first shop in the app', numOfDollarSigns=10, reviews=[Review{body='Its service is amazing', author='mohammad', numOfStars=7}]}";
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testTheaterClass() {
+        List<String> movies = new ArrayList<>();
+        movies.add("Fast & furious");
+        movies.add("Shutter Island");
+        movies.add("Tenet");
+        movies.add("Now Yos See Me");
+        movies.add("Me Before You");
+        Theater testTheater = new Theater("first Theater", movies);
+        String output = testTheater.toString();
+        String expected = "Theater{name='first Theater', movies=[Fast & furious, Shutter Island, Tenet, Now Yos See Me, Me Before You], reviews={}}";
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testTheaterAddReview() {
+        List<String> movies = new ArrayList<>();
+        movies.add("Fast & furious");
+        movies.add("Shutter Island");
+        movies.add("Tenet");
+        movies.add("Now Yos See Me");
+        movies.add("Me Before You");
+        Theater testTheater = new Theater("first Theater", movies);
+        testTheater.addReview("It's a great place to have","Rami",9);
+        String output = testTheater.toString();
+        String expected = "Theater{name='first Theater', movies=[Fast & furious, Shutter Island, Tenet, Now Yos See Me, Me Before You], reviews={=Review{body='It's a great place to have', author='Rami', numOfStars=9}}}";
+        assertEquals("Test add review without movie name",expected, output);
+        testTheater.addReview("This movie was great..","Omar",10,"Me Before You");
+        expected = "Theater{name='first Theater', movies=[Fast & furious, Shutter Island, Tenet, Now Yos See Me, Me Before You], reviews={=Review{body='It's a great place to have', author='Rami', numOfStars=9}, Me Before You=Review{body='This movie was great..', author='Omar', numOfStars=10}}}";
+        output = testTheater.toString();
+        assertEquals("Test add review to a specific movie",expected, output);
+    }
+
+    
+
+
+
 
 
 
